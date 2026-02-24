@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import ServiceCard from '@/components/ServiceCard';
+import { useSEO } from '@/hooks/useSEO';
 import {
   BarChart3,
   Zap,
@@ -23,13 +24,38 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  // SEO Optimization
+  useSEO({
+    title: 'DPS MEDIA - Marketing Digital que Vira Negócio | Google Ads, Meta Ads, CRM',
+    description: 'DPS MEDIA - Especialistas em Marketing Digital. Google Ads, Meta Ads, CRM, Automação e Inteligência Comercial. Transformamos dados em receita previsível. +351 925 708 456',
+    keywords: 'marketing digital, google ads, meta ads, crm, automação, inteligência comercial, tráfego pago, lead generation, branding, agencia marketing portugal',
+    ogImage: 'https://private-us-east-1.manuscdn.com/sessionFile/Ra6wn4O9caxGiJVRUprYau/sandbox/alvFS8D0xfw7u8yk0GFEtf-img-1_1771878323000_na1fn_aGVyby1iZy1kcHM.png',
+    canonical: 'https://dpsmedia.grupo-dps.com/',
+  });
+
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       setSubmitted(true);
       setEmail('');
+      // Track newsletter signup
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'newsletter_signup', {
+          email: email,
+        });
+      }
       setTimeout(() => setSubmitted(false), 3000);
     }
+  };
+
+  const trackWhatsAppClick = () => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'whatsapp_click', {
+        event_category: 'engagement',
+        event_label: 'floating_button',
+      });
+    }
+    window.open('https://wa.me/351925708456', '_blank');
   };
 
   return (
@@ -60,8 +86,8 @@ export default function Home() {
               Contacto
             </a>
           </div>
-          <Button
-            onClick={() => window.open('https://wa.me/351925708456', '_blank')}
+            <Button
+            onClick={trackWhatsAppClick}
             className="bg-gradient-to-r from-[#FF6B35] to-[#0066FF] text-white hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
             Contactar
