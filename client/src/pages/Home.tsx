@@ -86,12 +86,22 @@ export default function Home() {
               Contacto
             </a>
           </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="/planos"
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center justify-center min-h-[40px] px-5 rounded-full font-bold text-sm border-2 border-[#FF6B35] text-[#FF6B35] hover:bg-[#FF6B35] hover:text-white transition-all duration-300"
+            >
+              Planos
+            </a>
             <Button
-            onClick={trackWhatsAppClick}
-            className="bg-gradient-to-r from-[#FF6B35] to-[#0066FF] text-white hover:shadow-lg hover:scale-105 transition-all duration-300"
-          >
-            Contactar
-          </Button>
+              onClick={trackWhatsAppClick}
+              className="bg-gradient-to-r from-[#FF6B35] to-[#0066FF] text-white hover:shadow-lg hover:scale-105 transition-all duration-300"
+            >
+              Contactar
+            </Button>
+          </div>
         </div>
       </nav>
 
