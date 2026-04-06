@@ -139,12 +139,7 @@ export default function Home() {
                   Solicitar Diagnóstico Gratuito
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-2 border-[#FF6B35] text-[#FF6B35] hover:bg-[#FF6B35] hover:text-white transition-all duration-300 text-lg px-8 py-6"
-                >
-                  Saber Mais
-                </Button>
+
               </div>
               <div className="mt-12 grid grid-cols-3 gap-6">
                 <div>

@@ -1,10 +1,60 @@
 import { useEffect } from 'react';
+import logoPlanos from '/logo-dps-media-planos.png';
 
 const WHATSAPP_LINK = 'https://wa.me/351925708456?text=Ol%C3%A1%2C%20quero%20mais%20informa%C3%A7%C3%A3o%20sobre%20os%20pacotes%20da%20DPS%20Media.';
 
 export default function Planos() {
   useEffect(() => {
-    document.title = 'DPS Media | Planos e Pacotes';
+    document.title = 'Planos e Pacotes DPS Media | Gestão de Redes Sociais, Website, SEO e Tráfego Pago';
+
+    // SEO meta tags
+    const setMeta = (name: string, content: string, attr = 'name') => {
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el); }
+      el.setAttribute('content', content);
+    };
+    setMeta('description', 'Conheça os planos mensais da DPS Media: Starter (175€), Medium (275€) e Pro (450€). Gestão de redes sociais, criação de website desde 500€, SEO e tráfego pago. Crescimento digital com intenção comercial.');
+    setMeta('keywords', 'planos marketing digital, gestão redes sociais portugal, pacotes marketing digital, DPS Media planos, website empresa, SEO portugal, tráfego pago google ads, meta ads');
+    setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large');
+    setMeta('og:title', 'Planos DPS Media | Starter, Medium e Pro', 'property');
+    setMeta('og:description', 'Gestão de redes sociais, website, SEO e tráfego pago. Escolha o pacote certo para a sua marca crescer.', 'property');
+    setMeta('og:url', 'https://dpsmedia.grupo-dps.com/planos/', 'property');
+    setMeta('og:type', 'website', 'property');
+    setMeta('og:image', 'https://dpsmedia.grupo-dps.com/logo-dps-media-planos.png', 'property');
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', 'Planos DPS Media | Starter, Medium e Pro');
+    setMeta('twitter:description', 'Gestão de redes sociais, website, SEO e tráfego pago. Escolha o pacote certo para a sua marca crescer.');
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
+    canonical.setAttribute('href', 'https://dpsmedia.grupo-dps.com/planos/');
+
+    // Schema.org structured data
+    const schemaId = 'planos-schema';
+    if (!document.getElementById(schemaId)) {
+      const script = document.createElement('script');
+      script.id = schemaId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        'name': 'Planos DPS Media',
+        'description': 'Pacotes mensais de marketing digital da DPS Media',
+        'url': 'https://dpsmedia.grupo-dps.com/planos/',
+        'itemListElement': [
+          { '@type': 'Offer', 'position': 1, 'name': 'Starter', 'price': '175', 'priceCurrency': 'EUR', 'description': '2 posts semanais, calendário de conteúdos base' },
+          { '@type': 'Offer', 'position': 2, 'name': 'Medium', 'price': '275', 'priceCurrency': 'EUR', 'description': '3 posts semanais, 1 carrossel semanal' },
+          { '@type': 'Offer', 'position': 3, 'name': 'Pro', 'price': '450', 'priceCurrency': 'EUR', 'description': '5 posts semanais, 1 carrossel semanal, 1 vídeo semanal' }
+        ]
+      });
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      const s = document.getElementById(schemaId);
+      if (s) s.remove();
+    };
   }, []);
 
   return (
@@ -22,6 +72,20 @@ export default function Planos() {
         .planos-page * { box-sizing: border-box; }
         .planos-page a { text-decoration: none; color: inherit; }
         .planos-container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+        /* Logo */
+        .planos-logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none !important;
+        }
+        .planos-logo img {
+          height: 44px;
+          width: auto;
+          display: block;
+          object-fit: contain;
+        }
 
         /* Topbar */
         .planos-topbar {
@@ -388,7 +452,9 @@ export default function Planos() {
         {/* Topbar */}
         <div className="planos-topbar">
           <div className="planos-container planos-topbar-inner">
-            <span>Modelo agressivo de crescimento digital • DPS Media</span>
+            <a className="planos-logo" href="https://dpsmedia.grupo-dps.com" target="_self" aria-label="DPS Media - Voltar ao site">
+              <img src={logoPlanos} alt="DPS Media" />
+            </a>
             <div className="planos-topbar-links">
               <a className="planos-back-link" href="https://dpsmedia.grupo-dps.com" target="_self">
                 ← Voltar ao site
